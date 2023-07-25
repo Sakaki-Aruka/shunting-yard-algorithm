@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +23,10 @@ class RPN {
             if (s.equals(")")) {
                 int start = stack.indexOf("(");
                 outQueue.addAll(stack.subList(0, start));
-                stack.removeAll(stack.subList(0, start+1));
+                while (start > -1) {
+                    stack.remove(0);
+                    start--;
+                }
                 continue;
             }
             if (s.matches("(\\+|\\-|\\*|/|\\^)")) {
